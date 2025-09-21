@@ -1,6 +1,7 @@
+## EXPLICACIÓN
 Este programa permite registrar, buscar y eliminar ventas mensuales de tres departamentos: **Ropa, Deportes y Juguetería**, utilizando un **arreglo bidimensional** (matriz) donde las filas representan departamentos y las columnas los meses del año.
 
-#Métodos principales
+## Métodos principales
 - **insertarVenta()** → Permite ingresar una venta en un departamento y mes específico.  
 - **buscarVenta()** → Busca un monto en la matriz e indica en qué departamento y mes se encuentra.  
 - **eliminarVenta()** → Elimina una venta de un departamento y mes (se reemplaza por 0).  

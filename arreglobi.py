@@ -1,4 +1,4 @@
-departamentos = ["Ropa", "Deportes", "Juguetería"]
+ departamentos = ["Ropa", "Deportes", "Juguetería"]
 meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio",
          "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
@@ -11,22 +11,37 @@ def insertar_venta():
         print(f"{i} - {d}")
     depto = int(input("Opción: "))
 
-    mes = int(input("Seleccione el mes (0=Enero ... 11=Diciembre): "))
-    monto = float(input("Ingrese la venta: "))
+    try:
+        mes = int(input("Seleccione el mes (0=Enero ... 11=Diciembre): "))
+        if mes < 0 or mes >= len(meses):
+            print(" Mes inválido, debe estar entre 0 y 11.")
+            return
+    except ValueError:
+        print(" 1Debes ingresar un número entero para el mes.")
+        return
+
+    try:
+        monto = float(input("Ingrese la venta: "))
+    except ValueError:
+        print(" Debes ingresar un número válido para la venta.")
+        return
 
     ventas[depto][mes] = monto
     print("Venta registrada con éxito.")
 
 def buscar_venta():
-    monto = float(input("Ingrese el monto a buscar: "))
-    encontrado = False
-    for i in range(len(departamentos)):
-        for j in range(len(meses)):
-            if ventas[i][j] == monto:
-                print(f"Encontrado ${monto} en {departamentos[i]} - {meses[j]}")
-                encontrado = True
-    if not encontrado:
-        print("No se encontró la venta.")
+    print("Seleccione el departamento:")
+    for i, d in enumerate(departamentos):
+        print(f"{i} - {d}")
+    depto = int(input("Opción: "))
+
+    mes = int(input("Seleccione el mes (0=Enero ... 11=Diciembre): "))
+
+    monto = ventas[depto][mes]
+    if monto != 0:
+        print(f"Venta encontrada: ${monto} en {departamentos[depto]} - {meses[mes]}")
+    else:
+        print("No hay venta registrada en esa posición.")
 
 def eliminar_venta():
     print("Seleccione el departamento:")
@@ -35,8 +50,12 @@ def eliminar_venta():
     depto = int(input("Opción: "))
 
     mes = int(input("Seleccione el mes (0=Enero ... 11=Diciembre): "))
-    ventas[depto][mes] = 0
-    print("Venta eliminada correctamente.")
+
+    if ventas[depto][mes] != 0:
+        ventas[depto][mes] = 0
+        print(f"Venta eliminada en {departamentos[depto]} - {meses[mes]}")
+    else:
+        print("No había venta registrada en esa posición.")
 
 def mostrar_ventas():
     for i, d in enumerate(departamentos):
@@ -68,4 +87,4 @@ while True:
         print("Saliendo...")
         break
     else:
-        print("Opción inválida.")
+        print("Opción inválida.")   
